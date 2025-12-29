@@ -194,7 +194,7 @@ function init() {
         }
 
         clearResult();
-        setStatus('Searching…', false);
+        setStatus('Searching...', false);
         setBusy(true);
         beginLoading();
 
