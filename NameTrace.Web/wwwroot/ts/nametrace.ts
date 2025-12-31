@@ -1,5 +1,7 @@
 /**
- * NameTrace client
+ * nametrace.ts
+ * @fileoverview Phone number lookup client for reverse phone lookup service
+ * @description Handles form input, formatting, and API communication for phone lookups
  */
 
 type LookupResponse = { phone: string; name: string | null };
@@ -15,9 +17,10 @@ const spinnerEl = document.getElementById('nt-spinner') as HTMLElement | null;
 
 //==============================================================================================
 /**
- * Normalizes the phone input
+ * Normalizes phone input for lookup
+ * @description Validates and extracts digits from phone input, preserving + prefix
  * @param {string} raw - The raw phone input
- * @returns {string} The normalized phone input
+ * @returns {string} Normalized phone or empty string if invalid
  */
 function normalizePhoneInput(raw: string): string {
     const trimmed = raw.trim();
@@ -33,11 +36,12 @@ function normalizePhoneInput(raw: string): string {
     return (hasPlus ? '+' : '') + digits;
 }
 
-//==============================================================================================
+//===============================================================================================
 /**
- * Formats the phone input for display
+ * Formats US phone number for display
+ * @description Adds parentheses and dashes to phone digits, preserves + prefix
  * @param {string} raw - The raw phone input
- * @returns {string} The formatted phone input
+ * @returns {{ formatted: string; digits: string }} Formatted display string and extracted digits
  */
 function formatUsPhoneForInput(raw: string): { formatted: string; digits: string } {
     if (!raw) return { formatted: '', digits: '' };
@@ -70,9 +74,9 @@ function formatUsPhoneForInput(raw: string): { formatted: string; digits: string
 
 //==============================================================================================
 /**
- * Looks up the phone number
- * @param {string} phone - The phone number to look up
- * @returns {Promise<LookupResponse>} The lookup response
+ * Looks up phone number via API
+ * @param {string} phone - Normalized phone number to look up
+ * @returns {Promise<LookupResponse>} Response with phone and name or error
  */
 async function lookupPhone(phone: string): Promise<LookupResponse> {
     const resp = await fetch('/api/nametrace/lookup', {
@@ -96,6 +100,7 @@ async function lookupPhone(phone: string): Promise<LookupResponse> {
 //==============================================================================================
 /**
  * Initializes the NameTrace client
+ * @description Sets up event listeners for form submission, input formatting, and display updates
  */
 function init() {
     if (!form || !input || !submitBtn || !statusEl || !statusTextEl || !resultEl || !nameEl || !spinnerEl) {
