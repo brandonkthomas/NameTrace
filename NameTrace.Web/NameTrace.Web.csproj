@@ -17,7 +17,7 @@
   <!-- Build client JS from TS (do not commit generated JS) -->
   <Target Name="BuildNameTraceClient" BeforeTargets="Build">
     <PropertyGroup>
-      <_NameTraceClientTs>$(MSBuildProjectDirectory)/Client/ts/nametrace.ts</_NameTraceClientTs>
+      <_NameTraceClientTs>$(MSBuildProjectDirectory)/wwwroot/ts/nametrace.ts</_NameTraceClientTs>
       <_NameTraceOutDir>$(MSBuildProjectDirectory)/wwwroot/dist/js</_NameTraceOutDir>
       <_NameTraceOutFile>$(_NameTraceOutDir)/nametrace.js</_NameTraceOutFile>
       <_EsbuildCli>$(MSBuildProjectDirectory)/../../../node_modules/esbuild/bin/esbuild</_EsbuildCli>
