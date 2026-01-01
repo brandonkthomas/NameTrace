@@ -208,8 +208,11 @@ function init() {
             renderName(result.name || 'Unknown');
             setStatus('Lookup complete.', false);
         } catch (err) {
-            setStatus('Lookup failed. Please try again in a moment.', true);
+            setStatus('Lookup failed. Please try again later.', true);
+            
             renderName('Error retrieving name');
+            resultEl.hidden = true;
+            
             console.error('[NameTrace] lookup failed', err);
         } finally {
             endLoading();
