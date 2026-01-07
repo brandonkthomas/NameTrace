@@ -20,7 +20,9 @@
       <_NameTraceClientTs>$(MSBuildProjectDirectory)/wwwroot/ts/nametrace.ts</_NameTraceClientTs>
       <_NameTraceOutDir>$(MSBuildProjectDirectory)/wwwroot/dist/js</_NameTraceOutDir>
       <_NameTraceOutFile>$(_NameTraceOutDir)/nametrace.js</_NameTraceOutFile>
-      <_EsbuildCli>$(MSBuildProjectDirectory)/../../../node_modules/esbuild/bin/esbuild</_EsbuildCli>
+      <_EsbuildCli Condition="'$(EsbuildCli)' != ''">$(EsbuildCli)</_EsbuildCli>
+
+      <_EsbuildCli Condition="'$(_EsbuildCli)' == ''">$(MSBuildProjectDirectory)/../../../node_modules/esbuild/bin/esbuild</_EsbuildCli>
     </PropertyGroup>
 
     <MakeDir Directories="$(_NameTraceOutDir)" />
